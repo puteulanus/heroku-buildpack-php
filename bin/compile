@@ -157,7 +157,7 @@ export export_file_path=$bp_dir/export
 export profile_dir_path=$build_dir/.profile.d
 
 echo 'debug'
-composer update -vvv -d "$build_dir/.heroku/php" 
+composer why-not ext-zend-guard-loader
 composer -vvv install -d "$build_dir/.heroku/php" ${HEROKU_PHP_INSTALL_DEV-"--no-dev"}
 echo 'debug'
 
