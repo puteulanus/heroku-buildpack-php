@@ -160,7 +160,8 @@ export profile_dir_path=$build_dir/.profile.d
 #cat "$build_dir/.heroku/php"/composer.json 
 #/app/.heroku/php-min/bin/php composer.phar update -d "$build_dir/.heroku/php"
 
-sed -i 's#heroku-sys\/ext-zend-guard-loader#ext-zend-guard-loader#' "$build_dir/.heroku/php/composer.json"
+sed 's#heroku-sys\/ext-zend-guard-loader#ext-zend-guard-loader#' "$build_dir/.heroku/php/composer.json" > tmp.json
+cat tmp.json > "$build_dir/.heroku/php/composer.json"
 cat "$build_dir/.heroku/php/composer.json"
 
 if composer install -d "$build_dir/.heroku/php" ${HEROKU_PHP_INSTALL_DEV-"--no-dev"} 2>&1 | tee $build_dir/.heroku/php/install.log | grep --line-buffered -E '^  - (Instal|Enab)ling heroku-sys/' | sed -u -E -e 's/^  - (Instal|Enab)ling /- /' -e 's/heroku-sys\///g' | indent; then
