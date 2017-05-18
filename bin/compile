@@ -157,6 +157,8 @@ export export_file_path=$bp_dir/export
 export profile_dir_path=$build_dir/.profile.d
 
 echo 'debug'
+echo ${HEROKU_PHP_INSTALL_DEV-"--no-dev"}
+ls "$build_dir/.heroku/php"
 composer install -d "$build_dir/.heroku/php" ${HEROKU_PHP_INSTALL_DEV-"--no-dev"}
 echo 'debug'
 
