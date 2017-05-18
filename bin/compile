@@ -160,8 +160,7 @@ export profile_dir_path=$build_dir/.profile.d
 #cat "$build_dir/.heroku/php"/composer.json 
 #/app/.heroku/php-min/bin/php composer.phar update -d "$build_dir/.heroku/php"
 
-ln -s "$build_dir/.heroku/php/composer.json" `pwd`/composer2.json
-cat composer2.json
+cp "$build_dir/.heroku/php/composer.json" ./composer2.json
 /app/.heroku/php-min/bin/php -r "\$a = file_get_contents('composer2.json');var_dump(\$a);echo 'ok';" > "$build_dir/.heroku/php/composer.json"
 cat "$build_dir/.heroku/php/composer.json"
 
