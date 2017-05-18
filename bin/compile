@@ -113,7 +113,7 @@ mkdir -p $build_dir/.heroku/php-min/etc/php/conf.d
 cat << _EOF_ > $build_dir/.heroku/php-min/etc/php/conf.d/010-extension-dir.ini
 extension_dir=$build_dir/.heroku/php-min/ext
 _EOF_
-cat << _EOF_ > $build_dir/.heroku/php-min/etc/php/conf.d/010-ext-zend-guard-loader.ini.ini
+cat << _EOF_ > $build_dir/.heroku/php-min/etc/php/conf.d/020-ext-zend-guard-loader.ini
 zend_extension=ZendGuardLoader.so
 zend_loader.enable=1
 _EOF_
