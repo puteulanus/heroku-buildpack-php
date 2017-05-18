@@ -109,7 +109,7 @@ rm -f $build_dir/.heroku/php-min/php-min.zip
 chmod +x $build_dir/.heroku/php-min/bin/php
 
 # Configure zend guard loader
-mkdir $build_dir/.heroku/php-min/etc/php/conf.d
+mkdir -p $build_dir/.heroku/php-min/etc/php/conf.d
 cat << _EOF_ > $build_dir/.heroku/php-min/etc/php/conf.d/010-extension-dir.ini
 extension_dir=$build_dir/.heroku/php-min/ext
 _EOF_
