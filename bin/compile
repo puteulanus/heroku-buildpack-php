@@ -117,6 +117,7 @@ cat << _EOF_ > $build_dir/.heroku/php-min/etc/php/conf.d/020-ext-zend-guard-load
 zend_extension=ZendGuardLoader.so
 zend_loader.enable=1
 _EOF_
+cat $build_dir/.heroku/php-min/etc/php/conf.d/010-extension-dir.ini
 
 $build_dir/.heroku/php-min/bin/php -r 'phpinfo();' | grep zend
 
