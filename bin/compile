@@ -314,6 +314,9 @@ COMPOSER_bak="$COMPOSER"
 export COMPOSER=composer.json
 
 status "Checking for additional extensions to install..."
+
+sed -i 's/zend_extension=opcache.so/zend_extension=zend_opcache.so/' $build_dir/.heroku/php/etc/php/conf.d/010-ext-zend_opcache.ini
+
 # special treatment for Blackfire; we enable it if we detect a server id and a server token for it
 install_blackfire_ext
 # special treatment for New Relic; we enable it if we detect a license key for it
