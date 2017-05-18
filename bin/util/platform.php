@@ -82,12 +82,12 @@ if(file_exists($COMPOSER_LOCK)) {
 	// if we do not do this, then a require for e.g. ext-curl or ext-mbstring in the main composer.json cannot be found by the installer plugin
 	$root = [
 		"name" => "$COMPOSER/$COMPOSER_LOCK",
-		"version" => "dev-".($lock["content-hash"] ?? $lock['hash']),
+		"version" => "dev-".($lock["content-hash"] == NULL ? $lock['hash'] : $lock["content-hash"]),
 		"require" => $lock["platform"],
 	];
 	$rootDev = [
 		"name" => "$COMPOSER/$COMPOSER_LOCK-require-dev",
-		"version" => "dev-".($lock["content-hash"] ?? $lock['hash']),
+		"version" => "dev-".($lock["content-hash"] == NULL ? $lock['hash'] : $lock["content-hash"]),
 		"require" => $lock["platform-dev"],
 	];
 	// inject the root meta-packages into the read lock file so later code picks them up too
