@@ -102,11 +102,23 @@ ln -s $build_dir/.heroku/php-min /app/.heroku/php-min
 #tar xzf $build_dir/.heroku/php-min.tar.gz -C $build_dir/.heroku/php-min
 #rm $build_dir/.heroku/php-min.tar.gz
 
+# Download php 5.6
 wget -qO $build_dir/.heroku/php-min/php-min.zip  'https://github.com/puteulanus/heroku-buildpack-php/raw/master/support/build/php-min-5.6.30.zip'
-mkdir $build_dir/.heroku/php-min/bin
-unzip $build_dir/.heroku/php-min/php-min.zip -d $build_dir/.heroku/php-min/bin
+unzip -q $build_dir/.heroku/php-min/php-min.zip -d $build_dir/.heroku/php-min/
 rm -f $build_dir/.heroku/php-min/php-min.zip 
 chmod +x $build_dir/.heroku/php-min/bin/php
+
+# Configure zend guard loader
+mkdir $build_dir/.heroku/php-min/etc/php/conf.d
+cat << _EOF_ > $build_dir/.heroku/php-min/etc/php/conf.d/010-extension-dir.ini
+extension_dir=$build_dir/.heroku/php-min/ext
+_EOF_
+cat << _EOF_ > $build_dir/.heroku/php-min/etc/php/conf.d/010-ext-zend-guard-loader.ini.ini
+zend_extension=ZendGuardLoader.so
+zend_loader.enable=1
+_EOF_
+
+$build_dir/.heroku/php-min/bin/php -r 'phpinfo();' | grep zend
 
 curl_retry_on_18 --fail --silent --location -o $build_dir/.heroku/composer.tar.gz "${s3_url}composer-1.4.1.tar.gz" || error "Failed to download Composer. Please try again, or contact support if this problem persists."
 tar xzf $build_dir/.heroku/composer.tar.gz -C $build_dir/.heroku/php
