@@ -160,7 +160,7 @@ export profile_dir_path=$build_dir/.profile.d
 #cat "$build_dir/.heroku/php"/composer.json 
 #/app/.heroku/php-min/bin/php composer.phar update -d "$build_dir/.heroku/php"
 
-/app/.heroku/php-min/bin/php -r "\$a = json_decode(file_get_contents('$build_dir/.heroku/php/composer.json'),true)['repositories'][3]['package'];foreach (\$a as \$b => \$c) {if (array_key_exists('heroku-sys/ext-zend-guard-loader',\$c['require'])){\$a[\$b]['require']['ext-zend-guard-loader'] = \$c['require']['heroku-sys/ext-zend-guard-loader'];unset(\$a[\$b]['require']['heroku-sys/ext-zend-guard-loader']);}}echo json_encode(\$a);" > "$build_dir/.heroku/php/composer.json"
+/app/.heroku/php-min/bin/php -r "\$a = json_decode(file_get_contents('$build_dir/.heroku/php/composer.json'),true);\$a = \$a['repositories'][3]['package'];foreach (\$a as \$b => \$c) {if (array_key_exists('heroku-sys/ext-zend-guard-loader',\$c['require'])){\$a[\$b]['require']['ext-zend-guard-loader'] = \$c['require']['heroku-sys/ext-zend-guard-loader'];unset(\$a[\$b]['require']['heroku-sys/ext-zend-guard-loader']);}}echo json_encode(\$a);" > "$build_dir/.heroku/php/composer.json"
 
 cat $build_dir/.heroku/php/composer.json
 
